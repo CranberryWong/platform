@@ -1,0 +1,27 @@
+{% extends "admin_base.html" %}
+{% block active1 %}class="active"{% end %}
+{% block maincontent %}
+<h2 class="sub-header" id="nav-article">All Inform</h2>
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Article Id</th>
+        <th>Title</th>
+        <th>Create Time</th>
+        <th>Option</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for article in articleList %}
+      <tr>
+        <td>{{ article.aid }}</td>
+        <td>{{ article.atitle }}</td>
+        <td>{{ article.acreatetime.ctime()[0:16] }}</td>
+        <td><div><span><a href="/admin/article?aid={{ article.aid }}">Edit</a></span>&nbsp;&nbsp;|&nbsp;&nbsp;<span><a href="/admin/delarticle?aid={{ article.aid }}">Delete</a></span></div></td>
+      </tr>
+      {% end %}
+    </tbody>
+  </table>
+</div>
+{% end %}

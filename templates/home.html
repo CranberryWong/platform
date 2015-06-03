@@ -1,0 +1,109 @@
+<!Doctype>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Homepage</title>
+  <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+  <link href="../static/css/carousel.css" rel="stylesheet">
+  <link rel="stylesheet" href="../static/css/style.css">
+
+  <link rel="icon" href="../static/favicon.ico">
+</head>
+<body>
+
+
+    <div class="container">
+
+
+        <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="/">Platform</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+              <ul class="nav navbar-nav">
+                {% for category in categoryList %}
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ category.cname }}<span class="caret"></span></a>
+                  <ul class="dropdown-menu" role="menu">
+                    {% for item in category.cateofa %}
+                    <li><a href="/{{ item.atitle }}">{{ item.atitle }}</a></li>
+                    {% end %}
+                  </ul>
+                </li>
+               {% end %}
+
+                <li {% block active2 %}{% end %}><a href="/projects">Projects</a></li>
+
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">More <span class="caret"></span></a>
+                  <ul class="dropdown-menu" role="menu">
+                    <li><a href="/download">Download</a></li>
+                    <li><a href="/about">About</a></li>
+                    <li><a href="/contact">Contact</a></li>
+                  </ul>
+                </li>
+              </ul>
+
+            </div>
+
+          </div>
+        </nav>
+
+    </div>
+
+    <img src="../static/images/banner.png" style="width:100%;">
+    <div class="backfill">
+      <div class="container">
+        <h3 style="color:#515151;">{{ article.atitle }}</h3>
+      </div></div>
+<!--container-->
+<div class="container margintopfixed">
+  <div class="row">
+    <div class="col-md-12">
+
+  <p><span>创建时间: {{ article.acreatetime.ctime()[0:16] }}</span>&nbsp;&nbsp;<span>修改时间: {{ article.amodifytime.ctime()[0:16] }}</span></p>
+  <p>{{ article.acontent }}</p>
+
+
+  </div>
+</div>
+</div>
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <p>中国社会科学院金融研究所</p>
+<p><a href="/admin">Dashboard</a></p></div>
+
+<div class="col-md-4">
+  <address>
+    <strong>Twitter, Inc.</strong><br>
+    795 Folsom Ave, Suite 600<br>
+    San Francisco, CA 94107<br>
+    <abbr title="Phone">P:</abbr> (123) 456-7890
+  </address>
+
+</div>
+<div class="col-md-4">
+
+    <address>
+      <strong>Full Name</strong><br>
+      <a href="mailto:#">first.last@example.com</a>
+    </address>
+  </div>
+</div>
+</footer>
+<script src="../static/js/jquery-2.1.0.js"></script>
+<script src="../static/js/bootstrap.min.js"></script>
+<script src="../static/js/docs.min.js"></script>
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script src="../static/js/ie10-viewport-bug-workaround.js"></script>
+</body>
+</html>
