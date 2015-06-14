@@ -29,7 +29,7 @@ class Article(Base):
       self.acreatetime = datetime.now()
       self.amodifytime = datetime.now()
       self.acheck = True
-      self.luid = 1
+      self.acid = acid
 
    def __repr__(self):
       return "<Article('%s')>" % (self.atitle)
@@ -38,16 +38,17 @@ class Category(Base):
     __tablename__ = 'category'
 
     cid = Column(Integer, primary_key=True)
-    cname = Column(String(100), nullable=False)
+    cname = Column(String(100))
     ccheck = Column(Boolean)
 
     cateofa = relationship('Article')
 
-    def __init__(self, typename):
-        self.typename = typename
+    def __init__(self, cname):
+        self.cname = cname
+        self.ccheck = True
 
     def __repr__(self):
-        return "<Type('%s')>" % (self.typename)
+        return "<Category('%s')>" % (self.cname)
 
 class Setting(Base):
     __tablename__ = 'setting'
@@ -62,7 +63,7 @@ class Setting(Base):
         self.sname = sname
         self.sadmin = sadmin
         self.spwd = spwd
-
+        self.scount = 0
 
     def __repr__(self):
         return "<Setting('%s')>" % (self.sname)

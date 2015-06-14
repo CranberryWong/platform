@@ -21,7 +21,10 @@ class homeBase(SignValidateBase):
         self.session = db_session.getSession
         self.setting = self.session.query(Setting).all()
         category = self.session.query(Category).filter(Category.ccheck == True).all()
-
+        setting = self.session.query(Setting).filter(Setting.sid == 1).first()
+        setting.scount += 1
+        self.session.commit()
+        self.count = setting.scount
 
 class Home(homeBase):
     def get(self):
@@ -31,12 +34,13 @@ class Home(homeBase):
         article = self.session.query(Article).filter(Article.aid == 1).first()
         self.render('home.html', categoryList = categoryList, article = article)
         self.session.close()
-'''
+
 class showArticle(homeBase):
-    def get(self, articleTitle):
+    def get(self, aid):
         homeBase.init(self)
-        article = self.session.query(Article).filter(Article.atitle = articleTitle).first()
+        self.title = 'Home'
+        categoryList = self.session.query(Category).filter(Category.ccheck == True).all()
+        article = self.session.query(Article).filter(Article.aid == aid).first()
         self.title = article.atitle
-        self.render('', article = article)
+        self.render('home.html', article = article, categoryList = categoryList)
         self.session.close()
-'''

@@ -9,7 +9,6 @@ from PIL import Image
 from cStringIO import StringIO
 
 articles_path = os.path.join(os.path.abspath('.'), 'static/articles/')
-addon_path = os.path.join(os.path.abspath('.'), 'static/addon/')
 
 def nameRewrite(filename):
     file_timestamp = int(time.time())

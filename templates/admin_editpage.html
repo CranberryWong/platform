@@ -16,6 +16,13 @@
     <label for="exampleInputPassword1">Content</label>
     <textarea rows="16" class="form-control" id="editor" placeholder="Enter content" name="acontent">{{ article.acontent }}</textarea>
   </div>
+  <div class="form-group">
+  <select class="form-control" name="acategory">
+  {% for item in categoryList %}
+  <option {% if article.acid == item.cid %}selected="selected"{% end %}>{{ item.cname }}</option>
+  {% end %}
+</select>
+</div>
   <button type="submit" class="btn btn-primary">Submit</button>
   <button type="reset" class="btn btn-default">Reset</button>
 </form>

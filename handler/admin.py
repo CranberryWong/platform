@@ -71,14 +71,15 @@ class EditPage(StaticData):
     @tornado.web.authenticated
     def get(self):
         StaticData.init(self)
-        self.title = 'Dashboard Edit'
+        self.title = 'Edit Article'
         aid = self.get_argument('aid', default=None)
         if aid == None:
             article = Article('','',1)
             article.aid = None
         else:
             article = self.session.query(Article).filter(Article.aid == aid).first()
-        self.render('admin_editpage.html', active2 = 'class="active"', article = article)
+        categoryList = self.session.query(Category).all()
+        self.render('admin_editpage.html', active2 = 'class="active"', article = article, categoryList = categoryList)
         self.session.close()
 
     def post(self):
@@ -87,37 +88,18 @@ class EditPage(StaticData):
         aid = self.get_argument('aid', default='None')
         atitle = self.get_argument('atitle', default='')
         acontent = self.get_argument('acontent', default='')
-        if pid == 'None':
-            page = Page(ptitle, pcontent)
-            if 'file' in self.request.files:
-                file_dict_list = self.request.files['file']
-                for file_dict in file_dict_list:
-                    filename = nameRewrite(file_dict["filename"]).encode('utf8')
-                    data = file_dict["body"]
-                    image = Image.open(StringIO(data))
-                    image.save(page_path + filename, quality=150)
-                    '''
-                    with open(page_path + filename, 'w') as f:
-                        f.write(data)
-                        print filename'''
-                    page.ppic = '/static/page/' + filename
-            self.session.add(page)
+        acategory = self.get_argument('acategory', default='')
+        acid = self.session.query(Category).filter(Category.cname == acategory).first().cid
+        if aid == 'None':
+            article = Article(atitle, acontent, acid)
+            self.session.add(article)
             self.session.commit()
         else:
-            page = self.session.query(Page).filter(Page.pid == pid).first()
-            page.ptitle = ptitle
-            page.pcontent = pcontent
-            if 'file' in self.request.files:
-                file_dict_list = self.request.files['file']
-                for file_dict in file_dict_list:
-                    filename = nameRewrite(file_dict["filename"]).encode('utf8')
-                    if page.ppic[:len(filename)-10] != '/static/page/' + filename[:len(filename)-10]:
-                        print page.ppic[:len(filename)-10],'/static/page/' + filename[:len(filename)-10]
-                        data = file_dict["body"]
-                        image = Image.open(StringIO(data))
-                        image.save(avatar_path + filename, quality=150)
-                        page.ppic = '/static/page/' + filename
-            page.pchgtime = datetime.now()
+            article = self.session.query(Article).filter(Article.aid == aid).first()
+            article.atitle = atitle
+            article.acontent = acontent
+            article.acid = acid
+            article.amodifytime = datetime.now()
             self.session.commit()
         self.write('<script language="javascript">alert("提交成功");self.location="/admin/editpage"</script>')
         self.session.close()
@@ -126,10 +108,43 @@ class DelPage(StaticData):
     @tornado.web.authenticated
     def get(self):
         StaticData.init(self)
-        pid = self.get_argument('pid', default=None)
-        self.session.query(Page).filter(Page.pid == pid).delete()
+        aid = self.get_argument('aid', default=None)
+        self.session.query(Article).filter(Article.aid == aid).delete()
         self.session.commit()
         self.redirect('/admin')
+        self.session.close()
+
+class ChangeArticleChecked(StaticData):
+    @tornado.web.authenticated
+    def get(self):
+        StaticData.init(self)
+        aid = self.get_argument('aid')
+        achecked = self.get_argument('acheck')
+        print aid, achecked, type(achecked)
+        if achecked == 'False':
+            achecked = False
+        else:
+            achecked = True
+        article = self.session.query(Article).filter(Article.aid == aid).first()
+        article.acheck = not achecked
+        self.session.commit()
+        self.redirect('/admin')
+        self.session.close()
+
+class ChangeTypeChecked(StaticData):
+    @tornado.web.authenticated
+    def get(self):
+        StaticData.init(self)
+        cid = self.get_argument('cid')
+        cchecked = self.get_argument('ccheck')
+        if cchecked == 'False':
+            cchecked = False
+        else:
+            cchecked = True
+        category = self.session.query(Category).filter(Category.cid == cid).first()
+        category.ccheck = not cchecked
+        self.session.commit()
+        self.redirect('/admin/edittype')
         self.session.close()
 
 class TypeOption(StaticData):
@@ -140,11 +155,11 @@ class TypeOption(StaticData):
         categoryList = self.session.query(Category).all()
         cid = self.get_argument('cid', default=None)
         if cid == None:
-            cateobj = Category('',1)
+            cateobj = Category('')
             cateobj.cid = None
         else:
             cateobj = self.session.query(Category).filter(Category.cid == cid).first()
-        self.render('admin_type.html', categoryList = categoryList)
+        self.render('admin_type.html', categoryList = categoryList, cateobj = cateobj)
         self.session.close()
 
     def post(self):
@@ -152,7 +167,7 @@ class TypeOption(StaticData):
         cid = self.get_argument('cid', default='None')
         cname = self.get_argument('cname', default='')
         if cid == 'None':
-            cateobj = Category(typename)
+            cateobj = Category(cname)
             self.session.add(cateobj)
             self.session.commit()
         else:

@@ -24,7 +24,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-              <a class="navbar-brand" href="/">Platform</a>
+              <a class="navbar-brand" href="/">中国上市公司研究网</a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
               <ul class="nav navbar-nav">
@@ -33,22 +33,13 @@
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ category.cname }}<span class="caret"></span></a>
                   <ul class="dropdown-menu" role="menu">
                     {% for item in category.cateofa %}
-                    <li><a href="/{{ item.atitle }}">{{ item.atitle }}</a></li>
+                    <li>{% if item.acheck == True %}<a href="/a/{{ item.aid }}">{{ item.atitle }}</a>{% end %}</li>
                     {% end %}
                   </ul>
                 </li>
                {% end %}
 
-                <li {% block active2 %}{% end %}><a href="/projects">Projects</a></li>
 
-                <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">More <span class="caret"></span></a>
-                  <ul class="dropdown-menu" role="menu">
-                    <li><a href="/download">Download</a></li>
-                    <li><a href="/about">About</a></li>
-                    <li><a href="/contact">Contact</a></li>
-                  </ul>
-                </li>
               </ul>
 
             </div>
@@ -57,8 +48,14 @@
         </nav>
 
     </div>
-
-    <img src="../static/images/banner.png" style="width:100%;">
+    <div class="container">
+    <div class="jumbotron" style="margin-top:70px;background-image:url(../static/images/1.jpg)">
+      <h1>中国上市公司研究网</h1>
+      <p>中国社会科学院金融研究所</p>
+      <p><a class="btn btn-primary btn-lg" href="#" role="button">关于我们</a></p>
+    </div>
+  </div>
+    <!--<img src="../static/images/banner.png" style="width:100%;">-->
     <div class="backfill">
       <div class="container">
         <h3 style="color:#515151;">{{ article.atitle }}</h3>
@@ -78,11 +75,11 @@
 <footer>
   <div class="container">
     <div class="row">
-      <div class="col-md-4">
+      <div class="col-md-3">
         <p>中国社会科学院金融研究所</p>
 <p><a href="/admin">Dashboard</a></p></div>
 
-<div class="col-md-4">
+<div class="col-md-3">
   <address>
     <strong>Twitter, Inc.</strong><br>
     795 Folsom Ave, Suite 600<br>
@@ -91,13 +88,17 @@
   </address>
 
 </div>
-<div class="col-md-4">
+<div class="col-md-3">
 
     <address>
       <strong>Full Name</strong><br>
       <a href="mailto:#">first.last@example.com</a>
     </address>
   </div>
+  <div class="col-md-3">
+
+      <span>访问量:{{ handler.count }}</span>
+    </div>
 </div>
 </footer>
 <script src="../static/js/jquery-2.1.0.js"></script>
