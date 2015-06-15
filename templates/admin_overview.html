@@ -9,6 +9,7 @@
         <th>Article Id</th>
         <th>Title</th>
         <th>Create Time</th>
+        <th>Type</th>
         <th>Option</th>
         <th>ON/OFF</th>
       </tr>
@@ -19,6 +20,7 @@
         <td>{{ article.aid }}</td>
         <td>{{ article.atitle }}</td>
         <td>{{ article.acreatetime.ctime()[0:16] }}</td>
+        <td>{{ article.acate.cname }}</td>
         <td><div><span><a href="/admin/editpage?aid={{ article.aid }}">Edit</a></span>&nbsp;&nbsp;|&nbsp;&nbsp;<span><a href="/admin/delpage?aid={{ article.aid }}">Delete</a></span></div></td>
         <td><a href="/admin/changearticlechecked?aid={{ article.aid }}&acheck={{ article.acheck }}"><button id="check" type="button" class="btn btn-default btn-xs" value="{{ article.aid }}">{{ article.acheck }}</button></a></td>
       </tr>

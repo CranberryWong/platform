@@ -69,18 +69,18 @@ class Setting(Base):
         return "<Setting('%s')>" % (self.sname)
 
 class Link(Base):
-    __tablename__ = "link"
+    __tablename__ = "links"
 
     lid = Column(Integer, primary_key=True)
-    lname = Column(String(100), nullable=False)
+    ltitle = Column(String(100), nullable=False)
     lurl = Column(String(200), nullable=False)
 
-    def __init__(self):
-        self.lname = lname
+    def __init__(self, ltitle, lurl):
+        self.ltitle = ltitle
         self.lurl = lurl
 
     def __repr__(self):
-        return "<Link('%s')>" % (self.lname)
+        return "<Link('%s')>" % (self.ltitle)
 
 def getDBURL():
    return 'mysql+mysqlconnector://%s:%s@%s:%d/%s' % (DBSETTINGS['db_user'], DBSETTINGS['db_password'], DBSETTINGS['db_host'], DBSETTINGS['db_port'], DBSETTINGS['db_name'])

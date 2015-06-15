@@ -101,7 +101,7 @@ class EditPage(StaticData):
             article.acid = acid
             article.amodifytime = datetime.now()
             self.session.commit()
-        self.write('<script language="javascript">alert("提交成功");self.location="/admin/editpage"</script>')
+        self.write('<script language="javascript">alert("提交成功");self.location="/admin"</script>')
         self.session.close()
 
 class DelPage(StaticData):
@@ -190,11 +190,40 @@ class DelType(StaticData):
 class LinkOption(StaticData):
     @tornado.web.authenticated
     def get(self):
-        pass
+        StaticData.init(self)
+        self.title = 'Edit Link'
+        linkList = self.session.query(Link).all()
+        lid = self.get_argument('lid', default=None)
+        if lid == None:
+            linkobj = Link('', '')
+            linkobj.lid = None
+        else:
+            linkobj = self.session.query(Link).filter(Link.lid == lid).first()
+        self.render('admin_link.html', linkList = linkList, linkobj = linkobj)
+        self.session.close()
 
     def post(self):
-        pass
+        StaticData.init(self)
+        lid = self.get_argument('lid', default='None')
+        ltitle = self.get_argument('ltitle', default='')
+        lurl = self.get_argument('lurl', default='')
+        if lid == 'None':
+            linkobj = Link(ltitle, lurl)
+            self.session.add(linkobj)
+            self.session.commit()
+        else:
+            linkobj = self.session.query(Link).filter(Link.lid == lid).first()
+            linkobj.ltitle = ltitle
+            self.session.commit()
+        self.redirect('/admin/editlink')
+        self.session.close()
 
 class DelLink(StaticData):
+    @tornado.web.authenticated
     def get(self):
-        pass
+        StaticData.init(self)
+        cid = self.get_argument('lid', default=None)
+        self.session.query(Link).filter(Link.lid == lid).delete()
+        self.session.commit()
+        self.redirect('/admin/editlink')
+        self.session.close()

@@ -1,0 +1,43 @@
+{% extends "admin_base.html" %}
+{% block active4 %}class="active"{% end %}
+{% block maincontent %}
+
+<h2 class="sub-header" id="nav-article">Links</h2>
+<form class="form-inline" method="POST" action="/admin/editlink">
+
+<input type="hidden" name="lid" value="{{ linkobj.lid }}">
+<div class="form-group">
+<label class="sr-only" for="exampleInputEmail3">Add Link Title</label>
+<input type="input" class="form-control" id="exampleInputEmail3" placeholder="Enter Link Title" name="ltitle" value="{{ linkobj.ltitle }}">
+</div>
+<div class="form-group">
+<label class="sr-only" for="exampleInputEmail3">Add Link URL</label>
+<input type="input" class="form-control" id="exampleInputEmail3" placeholder="Enter Link URL" name="lurl" value="{{ linkobj.lurl }}">
+</div>
+<button type="submit" class="btn btn-default">Submit</button>
+</form>
+<div class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>URL</th>
+                <th>Option</th>
+
+              </tr>
+            </thead>
+            <tbody>
+              {% for item in linkList %}
+              <tr>
+                <td>{{ item.lid }}</td>
+                <td>{{ item.ltitle }}</td>
+                <td>{{ item.lurl }}</td>
+                <td><div><span><a href="/admin/editlink?lid={{ item.lid }}">Edit</a></span>&nbsp;&nbsp;|&nbsp;&nbsp;<span><a href="/admin/dellink?lid={{ item.lid }}">Delete</a></span></div></td>
+              </tr>
+              {% end %}
+            </tbody>
+          </table>
+
+        </div>
+{% end %}

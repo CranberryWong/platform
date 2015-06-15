@@ -20,6 +20,7 @@
 }
 .margintopfixed{
 	margin-top:30px;
+	min-height:500px;
 }
 .abouttitlefixed{
 	margin-top:0;
@@ -67,4 +68,7 @@ footer{
 }
 body{
 	padding-bottom:0px;
+}
+.nav-pills>li.active>a, .nav-pills>li.active>a:hover{
+	background-color:#fc4000;
 }
