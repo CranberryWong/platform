@@ -14,6 +14,20 @@ from datetime import datetime
 from PIL import Image
 from cStringIO import StringIO
 
+global lang_encode
+lang_encode = 'en_US'
+tornado.locale.set_default_locale(lang_encode)
+
+class changeLang(tornado.web.RequestHandler):
+    def get(self):
+        global lang_encode
+        if lang_encode == 'zh_CN':
+            lang_encode = 'en_US'
+        else:
+            lang_encode = 'zh_CN'
+        tornado.locale.set_default_locale(lang_encode)
+        self.redirect('/')
+
 class homeBase(SignValidateBase):
     def init(self):
         self.session = db_session.getSession
@@ -22,11 +36,16 @@ class homeBase(SignValidateBase):
         self.categoryList = self.session.query(Category).filter(Category.cname != '上市公司景气指数').filter(Category.cname != '上市公司质量评价').filter(Category.ccheck == True).all()
         setting = self.session.query(Setting).filter(Setting.sid == 1).first()
         setting.scount += 1
+        global lang_encode
+        print lang_encode
+        if lang_encode == 'zh_CN':
+            self.lang = 'English'
+        else:
+            self.lang = '中文版'
         self.session.commit()
         self.count = setting.scount
 
     def get_user_locale(self):
-        tornado.locale.set_default_locale("zh_CN")
         #return tornado.locale.set_default_locale('en_US')
         return tornado.locale.get("en_US")
 

@@ -1,4 +1,30 @@
 {% extends "home_base.html" %}
+{% block customCSS %}
+
+{% end %}
+{% block customJS1 %}
+<script type="text/javascript">
+  function showOrHide(obj,event)
+  {
+    var etype = event.type;
+    var href = obj.href;
+    var start=href.indexOf("#");
+    var end = href.length;
+    var ptype = href.substring(start+1,end);
+    var paneObj = document.getElementById(ptype);
+    var allTabContent = $(".tab-content").children();
+
+    $(allTabContent).each(function(){
+      var contentClass = $(this).attr('class');
+      if(contentClass.indexOf("active") != -1)
+      {
+        $(this).removeClass("active");
+      }
+    });
+    $("#"+ptype).addClass("active");
+  }
+</script>
+{% end %}
 {% block active1 %}class="active"{% end %}
 {% block maincontent %}
     <!--<img src="../static/images/banner.png" style="width:100%;">-->
@@ -14,7 +40,79 @@
   <p><span>创建时间: {{ article.acreatetime.ctime()[0:16] }}</span>&nbsp;&nbsp;<span>修改时间: {{ article.amodifytime.ctime()[0:16] }}</span></p>
   <p>{{ article.acontent }}</p>
 
+  <div class="firstrow">
+  <div class="row">
+    <div class="col-md-6"><!--第一栏第一个-->
+      <div class="mylabel">
+        <p class="more"><a href="">more</a></p>
+        <div class="mytab">
+          <p class="tabstring">国际新闻</p>
+        </div>
+      </div>
+      <div class="list1">
+        <a href="#" class="mylist">李克强总理来访吉大</a>
+        <a href="#" class="mylist">李克强总理来访吉大</a>
+        <a href="#" class="mylist">李克强总理来访吉大</a>
+        <a href="#" class="mylist">李克强总理来访吉大</a>
+        <a href="#" class="mylist">李克强总理来访吉大</a>
+        <a href="#" class="mylist">李克强总理来访吉大</a>
+      </div>
+    </div><!--第一栏第一个结束-->
 
+    <div class="col-md-6"><!--第一栏第二个-->
+      <div class="mylabel">
+        <p class="more"><a href="#">more</a></p>
+        <div class="mytab">
+          <p class="tabstring">国际新闻</p>
+        </div>
+      </div>
+      <div class="list2">
+        <a href="#" class="mylist">李克强总理来访吉大</a>
+        <a href="#" class="mylist">李克强总理来访吉大</a>
+        <a href="#" class="mylist">李克强总理来访吉大</a>
+        <a href="#" class="mylist">李克强总理来访吉大</a>
+        <a href="#" class="mylist">李克强总理来访吉大</a>
+        <a href="#" class="mylist">李克强总理来访吉大</a>
+      </div>
+    </div><!--第一栏第二个结束-->
+  </div>
+  </div>
+<div class="row">
+    <div class="col-md-6"><!--第二栏第一个-->
+      <div class="mylabel">
+        <p class="more"><a href="">more</a></p>
+        <div class="mytab">
+          <p class="tabstring">国际新闻</p>
+        </div>
+      </div>
+      <div class="list1">
+        <a href="#" class="mylist">李克强总理来访吉大</a>
+        <a href="#" class="mylist">李克强总理来访吉大</a>
+        <a href="#" class="mylist">李克强总理来访吉大</a>
+        <a href="#" class="mylist">李克强总理来访吉大</a>
+        <a href="#" class="mylist">李克强总理来访吉大</a>
+        <a href="#" class="mylist">李克强总理来访吉大</a>
+      </div>
+    </div><!--第二栏第一个结束-->
+
+    <div class="col-md-6"><!--第二栏第二个-->
+      <div class="mylabel">
+        <p class="more"><a href="#">more</a></p>
+        <div class="mytab">
+          <p class="tabstring">国际新闻</p>
+        </div>
+      </div>
+      <div class="list2">
+        <a href="#" class="mylist">李克强总理来访吉大</a>
+        <a href="#" class="mylist">李克强总理来访吉大</a>
+        <a href="#" class="mylist">李克强总理来访吉大</a>
+        <a href="#" class="mylist">李克强总理来访吉大</a>
+        <a href="#" class="mylist">李克强总理来访吉大</a>
+        <a href="#" class="mylist">李克强总理来访吉大</a>
+      </div>
+    </div><!--第二栏第二个结束-->
+</div>
+</div>
   </div>
 </div>
 </div>

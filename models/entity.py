@@ -19,6 +19,7 @@ class Article(Base):
    amodifytime = Column(DateTime, nullable=False)
    acid = Column(Integer, ForeignKey('category.cid'))
    acheck = Column(Boolean)
+   #alang = Column(Boolean)
 
 
    acate = relationship('Category', backref='category')

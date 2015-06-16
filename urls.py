@@ -23,5 +23,6 @@ homeurls = [
    (r"/admin/dellink",admin.DelLink),
    (r"/admin/aboutus",admin.SettingsOption),
    (r"/upload?",upload.ImageUpload),
+   (r"/changelang",home.changeLang),
    (r'/c/([0-9]+)/date/([0-9]+)/([0-9]+)',home.listByDate),
 ]

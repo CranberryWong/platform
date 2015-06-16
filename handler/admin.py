@@ -256,7 +256,7 @@ class SettingsOption(StaticData):
         self.title = 'Edit About'
         StaticData.init(self)
         info_path = os.path.join(self.get_template_path(), 'aboutme.md')
-        with open('info_path', 'r') as f:
+        with open(info_path, 'r') as f:
             aboutcontent = f.read().decode('utf8')
         self.render('admin_aboutus.html', aboutcontent = aboutcontent)
         self.session.close()
@@ -264,6 +264,6 @@ class SettingsOption(StaticData):
     def post(self):
         info_path = os.path.join(self.get_template_path(), 'aboutme.md')
         aboutcontent = self.get_argument('siteabout', default='')
-        with open('info_path', 'w') as f:
+        with open(info_path, 'w') as f:
             f.write(aboutcontent.encode('utf8'))
         self.write('<script language="javascript">alert("提交成功");self.location="/admin/aboutus";</script>')
