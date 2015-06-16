@@ -11,11 +11,10 @@
   <link rel="icon" href="/static/favicon.ico">
 </head>
 <body>
-
-
-    <div class="container">
-      <div class="brand pull-left"><a href="/"><img src="/static/images/logo.png" style="width:70%;"></a></div>
-      <nav style="margin-top:30px;" class="pull-right">
+<header>
+  <img src="/static/images/header.png" style="width:100%;position:absolute;z-index:1;">
+    <div class="container" style="position:absolute;z-index:20;right:13%;top:33%;">
+      <nav style="margin-top:80px;" class="pull-right">
 
                <ul class="nav nav-pills">
                  <li role="presentation" {% block active1 %}{% end %}><a href="/">{{ _('Home') }}</a></li>
@@ -28,7 +27,11 @@
 
         </nav>
    </div>
+
+</header>
+
       {% block maincontent %}{% end %}
+
 <footer>
   <div class="container">
     <div class="row">

@@ -70,5 +70,162 @@ body{
 	padding-bottom:0px;
 }
 .nav-pills>li.active>a, .nav-pills>li.active>a:hover{
+	background-color:#ffa312;
+}
+.nav-pills>li>a{
+	color:#eeeeee;
+}
+.nav-pills>li>a:hover{
+	color:red;
+}
+/* lizhuang's css */
+.nav
+{
+	float:left;
+}
+.atab
+{
+	margin-bottom:20px;
+}
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover
+{
+	border-color:#FFFFFF;
+}
+.nav-tabs > li
+{
+	clear:both;
+}
+.tab-content
+{
+	float:left;
+	margin-left:40px;
+	margin-top:10px;
+}
+.nav-tabs
+{
+	border-bottom:0px;
+}
+.mylabel
+{
+	height:30px;
+	border-bottom:1px solid #c40000;
+	margin-bottom:10px;
+}
+.mytab
+{
+	width:100px;
+	height:30px;
 	background-color:#fc4000;
+	border-top-left-radius:3px;
+	border-top-right-radius:3px;
+	text-align:center;
+}
+.mylist
+{
+	display:block;
+}
+.tabstring
+{
+	color:white;
+	padding-top:5px;
+
+}
+.more
+{
+	float:right;
+	color:#c40000;
+	font-size:1em;
+}
+.firstrow
+{
+	margin-bottom:40px;
+}
+.bs-docs-footer
+{
+	padding-top: 40px;
+padding-bottom: 40px;
+margin-top: 100px;
+color: #767676;
+text-align: center;
+border-top: 1px solid #e5e5e5;
+}
+.bs-docs-footer-links {
+padding-left: 0;
+margin-top: 20px;
+}
+.bs-docs-footer-links li {
+display: inline;
+padding: 0 2px;
+}
+.list1 li{
+	padding:5px 0 5px 0;
+	border-bottom:1px #eeeeee solid;
+}
+/* end */
+/* template's css */
+
+*{ padding:0; margin:0;}
+#nav {
+	float: left;
+
+	width: 493px;
+	list-style-type: none;
+}
+#nav .navli{
+	float: left;
+	position: relative;
+	height: 28px;
+	padding-right: 8px;
+	padding-left: 8px;
+	border: 1px solid #c2dcf9;
+	margin:8px;
+	line-height: 28px;
+	font-size: 14px;
+	background-color: #f0f7ff;
+	font-weight:bold;
+	white-space: nowrap;
+	z-index:9998;
+}
+#nav .navli a {
+	text-decoration:none;
+	color:#114982;
+}
+#nav .curr {
+	background-color: #ff8a00;
+	z-index:9999;
+}
+#nav .navli.curr { z-index:9999;}
+#nav .curr a{
+	color:#fff;
+	text-decoration:none;
+}
+#nav .navli .sublist {
+	float:left;
+	position: absolute;
+	z-index: 999;
+	left:0;
+	top:29px;
+	background-color:#fff;
+	font-size:12px;
+	font-weight:normal;
+	border:solid 1px #ff8a00;
+	list-style:none;
+	display:none;
+}
+#nav .navli .sublist a{
+	color:#656565;
+}
+#nav .navli .sublist li {
+
+	line-height: 25px;
+	padding-left:15px;
+	padding-right:15px;
+	text-align:center;
+}
+/* end */
+header{
+	/*background-image: url('/static/images/header.png');*/
+	width:100%;
+	height:289px;
+	position:relative;
 }
