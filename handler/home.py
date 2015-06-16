@@ -7,34 +7,13 @@ import os
 import tornado.web
 import markdown
 import random
+import tornado.locale
 from models.entity import Article, Category, Setting, Link
 from models.entity import db_session
-from handler.admin import SignValidateBase
+from handler.admin import SignValidateBase, Pagination, generatePagination, picture_path
 from datetime import datetime
 from PIL import Image
 from cStringIO import StringIO
-
-picture_path = os.path.join(os.path.abspath('.'), 'static/picture/')
-
-class Pagination(object):
-    def __init__(self):
-        self.pre = ''
-        self.next = ''
-        self.pages = []
-        self.current = ''
-        self.action = ''
-
-def generatePagination(action, bloglist, targetpage):
-    targetpage = int(targetpage)
-    pagination = Pagination()
-    pagination.current = targetpage
-    maxpage = len(bloglist)
-    pagination.pages = range(1, maxpage/10+2)
-    pagination.pre = str(targetpage-1) if targetpage-1 in pagination.pages else str(targetpage)
-    pagination.next = str(targetpage+1) if targetpage+1 in pagination.pages else str(targetpage)
-    pagination.action = action
-    bloglist = bloglist[(targetpage-1) * 10 : targetpage * 10]
-    return bloglist, pagination
 
 class homeBase(SignValidateBase):
     def init(self):
@@ -46,6 +25,11 @@ class homeBase(SignValidateBase):
         setting.scount += 1
         self.session.commit()
         self.count = setting.scount
+
+    def get_user_locale(self):
+        tornado.locale.set_default_locale("zh_CN")
+        #return tornado.locale.set_default_locale('en_US')
+        return tornado.locale.get("en_US")
 
 class staticBase(homeBase):
     def init(self, cid):
@@ -66,7 +50,7 @@ class staticBase(homeBase):
 class Home(homeBase):
     def get(self):
         homeBase.init(self)
-        self.title = 'Home'
+        self.title = '主页'
         article = self.session.query(Article).filter(Article.aid == 1).first()
         self.render('home_index.html', article = article)
         self.session.close()
@@ -93,7 +77,7 @@ class showList(staticBase):
 class showAbout(homeBase):
     def get(self):
         homeBase.init(self)
-        self.title = 'About us'
+        self.title = '关于我们'
         info_path = os.path.join(self.get_template_path(), 'aboutme.md')
         aboutcontent = markdown.markdown(open(info_path).read().decode('utf8'))
         self.render('home_about.html', aboutcontent = aboutcontent)

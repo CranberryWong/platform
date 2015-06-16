@@ -5,8 +5,8 @@
     <div class="col-md-9">
       <div class="blog-post">
       <h2 class="blog-post-title"><a href="/c/{{ cid }}/a/{{ article.aid }}">{{ article.atitle }}</a></h2>
-      <p>Type:{{ article.acate.cname }}</p>
-      <p class="blog-post-meta">创建时间:{{ article.acreatetime.ctime()[0:16] }}&nbsp;&nbsp;&nbsp;&nbsp;修改时间:{{ article.amodifytime }}</p>
+      <p>{{ _('Category') }}:{{ _(article.acate.cname) }}</p>
+      <p class="blog-post-meta">{{ _('Create Time') }}:{{ article.acreatetime }}&nbsp;&nbsp;&nbsp;&nbsp;{{ _('Modify Time') }}:{{ article.amodifytime }}</p>
       <hr>
       <P> {{ article.acontent }}</p>
     </div><!-- /.blog-post -->
@@ -26,7 +26,7 @@
 
 
             {% for link in handler.links %}
-            <li>&nbsp;&nbsp;&nbsp;<a href="{{ link.lkurl }}" alt="{{ link.lkdescribe }}">{{ link.lkname }}</a></li>
+            <li>&nbsp;&nbsp;&nbsp;<a href="{{ link.lurl }}" alt="">{{ link.ltitle }}</a></li>
             {% end %}
           </ol>
         </div>

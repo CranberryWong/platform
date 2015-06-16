@@ -2,11 +2,12 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>{{ handler.title }}</title>
+  <title>{{ _(handler.title) }}</title>
   <link rel="stylesheet" href="/static/css/bootstrap.min.css">
   <link href="/static/css/carousel.css" rel="stylesheet">
   <link rel="stylesheet" href="/static/css/style.css">
   {% block customCSS %}{% end %}
+  {% block customJS1 %}{% end %}
   <link rel="icon" href="/static/favicon.ico">
 </head>
 <body>
@@ -17,11 +18,11 @@
       <nav style="margin-top:30px;" class="pull-right">
 
                <ul class="nav nav-pills">
-                 <li role="presentation" {% block active1 %}{% end %}><a href="/">主页</a></li>
+                 <li role="presentation" {% block active1 %}{% end %}><a href="/">{{ _('Home') }}</a></li>
                  {% for category in handler.categoryList %}
-                 <li role="presentation"><a href="/c/{{ category.cid }}">{{ category.cname }}</a></li>
+                 <li role="presentation"><a href="/c/{{ category.cid }}">{{ _(category.cname) }}</a></li>
                  {% end %}
-                 <li role="presentation" {% block active2 %}{% end %}><a href="/aboutus">关于我们</a></li>
+                 <li role="presentation" {% block active2 %}{% end %}><a href="/aboutus">{{ _('About Us') }}</a></li>
                 </ul>
 
         </nav>
@@ -62,6 +63,6 @@
 <script src="/static/js/docs.min.js"></script>
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script src="/static/js/ie10-viewport-bug-workaround.js"></script>
-  {% block customJS %}{% end %}
+{% block customJS2 %}{% end %}
 </body>
 </html>

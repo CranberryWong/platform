@@ -9,12 +9,21 @@
     {% end %}
     <div class="col-md-9">
       <table class="table table-hover">
+        <thead>
+        <tr>
+          <th>{{ _('Title') }}</th>
+          <th>{{ _('Create Time') }}</th>
+
+        </tr>
+      </thead>
+      <tbody>
         {% for item in articleList %}
         <tr>
-          <td><a href="/c/{{ cid }}/a/{{ item.aid }}">{{ item.atitle }}</a></td>
+          <td style="min-width:400px;"><a href="/c/{{ cid }}/a/{{ item.aid }}">{{ item.atitle }}</a></td>
           <td>{{ item.acreatetime.ctime()[:16] }}</td>
           </tr>
           {% end %}
+        </tbody>
 </table>
 <nav>
             <ul class="pagination">
@@ -29,20 +38,20 @@
     </div>
     <div class="col-md-3">
       <div class="sidebar-module">
-          <h4><span class="glyphicon glyphicon-inbox" aria-hidden="true"></span>&nbsp;&nbsp;Archives</h4>
+          <h4><span class="glyphicon glyphicon-inbox" aria-hidden="true"></span>&nbsp;&nbsp;{{ _('Archives') }}</h4>
           <ol class="list-unstyled">
             {% for art in handler.articlebydate%}
-            <li><i class="icon-hand-right"></i>&nbsp;&nbsp;&nbsp;<a href="/c/{{ cid }}/date/{{ art['year']}}/{{ art['month'] }}">{{ art['year'] }}年{{ art['month'] }}月（{{ art['num'] }}篇）</a></li>
+            <li><i class="icon-hand-right"></i>&nbsp;&nbsp;&nbsp;<a href="/c/{{ cid }}/date/{{ art['year']}}/{{ art['month'] }}">{{ art['year'] }}-{{ art['month'] }}（{{ art['num'] }}）</a></li>
             {% end %}
           </ol>
         </div>
         <div class="sidebar-module">
-          <h4><span class="glyphicon glyphicon-link" aria-hidden="true"></span>&nbsp;&nbsp;Friendly Link</h4>
+          <h4><span class="glyphicon glyphicon-link" aria-hidden="true"></span>&nbsp;&nbsp;{{ _('Friendly Link') }}</h4>
           <ol class="list-unstyled">
 
 
             {% for link in handler.links %}
-            <li>&nbsp;&nbsp;&nbsp;<a href="{{ link.lkurl }}" alt="">{{ link.ltitle }}</a></li>
+            <li>&nbsp;&nbsp;&nbsp;<a href="{{ link.lurl }}" alt="">{{ link.ltitle }}</a></li>
             {% end %}
           </ol>
         </div>

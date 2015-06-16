@@ -15,6 +15,26 @@ from PIL import Image
 
 picture_path = os.path.join(os.path.abspath('.'), 'static/picture/')
 
+class Pagination(object):
+    def __init__(self):
+        self.pre = ''
+        self.next = ''
+        self.pages = []
+        self.current = ''
+        self.action = ''
+
+def generatePagination(action, bloglist, targetpage):
+    targetpage = int(targetpage)
+    pagination = Pagination()
+    pagination.current = targetpage
+    maxpage = len(bloglist)
+    pagination.pages = range(1, maxpage/10+2)
+    pagination.pre = str(targetpage-1) if targetpage-1 in pagination.pages else str(targetpage)
+    pagination.next = str(targetpage+1) if targetpage+1 in pagination.pages else str(targetpage)
+    pagination.action = action
+    bloglist = bloglist[(targetpage-1) * 10 : targetpage * 10]
+    return bloglist, pagination
+
 class SignValidateBase(tornado.web.RequestHandler):
    def get_current_user(self):
       return self.get_secure_cookie('username')
@@ -63,7 +83,9 @@ class AdminHome(StaticData):
     def get(self):
         StaticData.init(self)
         self.title = 'Dashboard'
-        articleList = self.session.query(Article).all()
+        List = self.session.query(Article).all()
+        targetpage = int(self.get_argument('page',default='1'))
+        articleList, self.pagination = generatePagination('/admin?page=', List, targetpage)
         self.render('admin_overview.html', articleList = articleList)
         self.session.close()
 
@@ -227,3 +249,20 @@ class DelLink(StaticData):
         self.session.commit()
         self.redirect('/admin/editlink')
         self.session.close()
+
+class SettingsOption(StaticData):
+    @tornado.web.authenticated
+    def get(self):
+        self.title = 'Edit About'
+        StaticData.init(self)
+        info_path = os.path.join(self.get_template_path(), 'aboutme.md')
+        aboutcontent = open(info_path).read().decode('utf8')
+        self.render('admin_aboutus.html', aboutcontent = aboutcontent)
+        self.session.close()
+
+    def post(self):
+        info_path = os.path.join(self.get_template_path(), 'aboutme.md')
+        aboutcontent = self.get_argument('siteabout', default='')
+        with open('info_path', 'w') as f:
+            f.write(aboutcontent.encode('utf8'))
+        self.write('<script language="javascript">alert("提交成功");self.location="/admin/aboutus";</script>')

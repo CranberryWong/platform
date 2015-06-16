@@ -28,4 +28,14 @@
     </tbody>
   </table>
 </div>
+<nav>
+            <ul class="pagination">
+              <li><a href="{{ handler.pagination.action }}{{ handler.pagination.pre }}">&laquo;</a></li>
+              {% for page in handler.pagination.pages %}
+              <li {% if handler.pagination.current == page %} class="active" {% end %}><a href="{{ handler.pagination.action }}{{ page }}">{{ page }}</a></li>
+              {% end %}
+              <li><a href="{{ handler.pagination.action }}{{ handler.pagination.next }}">&raquo;</a></li>
+              </ul>
+            </ul>
+          </nav>
 {% end %}
