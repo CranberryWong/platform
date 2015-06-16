@@ -256,7 +256,8 @@ class SettingsOption(StaticData):
         self.title = 'Edit About'
         StaticData.init(self)
         info_path = os.path.join(self.get_template_path(), 'aboutme.md')
-        aboutcontent = open(info_path).read().decode('utf8')
+        with open('info_path', 'r') as f:
+            aboutcontent = f.read().decode('utf8')
         self.render('admin_aboutus.html', aboutcontent = aboutcontent)
         self.session.close()
 

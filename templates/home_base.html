@@ -20,7 +20,7 @@
                <ul class="nav nav-pills">
                  <li role="presentation" {% block active1 %}{% end %}><a href="/">{{ _('Home') }}</a></li>
                  {% for category in handler.categoryList %}
-                 <li role="presentation"><a href="/c/{{ category.cid }}">{{ _(category.cname) }}</a></li>
+                 <li role="presentation" {% if request.path == '/c/'+str(category.cid) %}class="active"{% end %}"><a href="/c/{{ category.cid }}">{{ _(category.cname) }}</a></li>
                  {% end %}
                  <li role="presentation" {% block active2 %}{% end %}><a href="/aboutus">{{ _('About Us') }}</a></li>
                 </ul>

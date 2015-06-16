@@ -5,7 +5,6 @@ import logging
 import time
 import os
 import tornado.web
-import markdown
 import random
 import tornado.locale
 from models.entity import Article, Category, Setting, Link
@@ -50,7 +49,7 @@ class staticBase(homeBase):
 class Home(homeBase):
     def get(self):
         homeBase.init(self)
-        self.title = '主页'
+        self.title = 'Home'
         article = self.session.query(Article).filter(Article.aid == 1).first()
         self.render('home_index.html', article = article)
         self.session.close()
@@ -77,9 +76,10 @@ class showList(staticBase):
 class showAbout(homeBase):
     def get(self):
         homeBase.init(self)
-        self.title = '关于我们'
+        self.title = 'About Us'
         info_path = os.path.join(self.get_template_path(), 'aboutme.md')
-        aboutcontent = markdown.markdown(open(info_path).read().decode('utf8'))
+        with open(info_path, 'r') as f:
+            aboutcontent = f.read().decode('utf8')
         self.render('home_about.html', aboutcontent = aboutcontent)
         self.session.close()
 
