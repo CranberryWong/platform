@@ -69,8 +69,7 @@ class Home(homeBase):
     def get(self):
         homeBase.init(self)
         self.title = 'Home'
-        article = self.session.query(Article).filter(Article.aid == 1).first()
-        self.render('home_index.html', article = article)
+        self.render('home_index.html')
         self.session.close()
 
 class showArticle(staticBase):
