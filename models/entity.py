@@ -19,18 +19,19 @@ class Article(Base):
    amodifytime = Column(DateTime, nullable=False)
    acid = Column(Integer, ForeignKey('category.cid'))
    acheck = Column(Boolean)
-   #alang = Column(Boolean)
+   abc = Column(Boolean)
 
 
    acate = relationship('Category', backref='category')
 
-   def __init__(self, atitle, acontent, acid):
+   def __init__(self, atitle, acontent, acid, abc):
       self.atitle = atitle
       self.acontent = acontent
       self.acreatetime = datetime.now()
       self.amodifytime = datetime.now()
       self.acheck = True
       self.acid = acid
+      self.abc = abc
 
    def __repr__(self):
       return "<Article('%s')>" % (self.atitle)

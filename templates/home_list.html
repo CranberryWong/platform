@@ -20,7 +20,7 @@
         {% for item in articleList %}
         <tr>
           <td style="min-width:400px;"><a href="/c/{{ cid }}/a/{{ item.aid }}">{{ item.atitle }}</a></td>
-          <td>{{ item.acreatetime }}</td>
+          <td>{{ item.acreatetime.date() }}</td>
           </tr>
           {% end %}
         </tbody>

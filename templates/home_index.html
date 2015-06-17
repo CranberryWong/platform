@@ -2,6 +2,29 @@
 {% block customCSS %}
 
 {% end %}
+{% block customJS1 %}
+<script type="text/javascript">
+		function showOrHide(obj,event)
+		{
+			var etype = event.type;
+			var href = obj.href;
+			var start=href.indexOf("#");
+			var end = href.length;
+			var ptype = href.substring(start+1,end);
+			var paneObj = document.getElementById(ptype);
+			var allTabContent = $(".tab-content").children();
+
+			$(allTabContent).each(function(){
+				var contentClass = $(this).attr('class');
+				if(contentClass.indexOf("active") != -1)
+				{
+					$(this).removeClass("active");
+				}
+			});
+			$("#"+ptype).addClass("active");
+		}
+	</script>
+{% end %}
 {% block active1 %}class="active"{% end %}
 {% block maincontent %}
     <!--<img src="../static/images/banner.png" style="width:100%;">-->
@@ -9,9 +32,30 @@
 <!--container-->
 <div class="container margintopfixed">
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12"
+		<div role="tabpanel" class="col-md-12" style="height:400px;margin-top:20px;">
+		  <!-- Nav tabs -->
+		  <ul class="nav nav-tabs" role="tablist">
+			<li role="presentation" class='line'><a href="#home" aria-controls="home" role="tab" data-toggle="tab" onmouseover="showOrHide(this,event)" class="atab">钢铁</a></li>
+			<li role="presentation" class='line'><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab" onmouseover="showOrHide(this,event)" class="atab">乳制品</a></li>
+			<li role="presentation" class='line'><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab" onmouseover="showOrHide(this,event)" class="atab">家电</a></li>
+			<li role="presentation" class='line'><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab" onmouseover="showOrHide(this,event)" class="atab">装备制造</a></li>
+			<li role="presentation" class='line'><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab" onmouseover="showOrHide(this,event)" class="atab">石油</a></li>
+			<li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab" onmouseover="showOrHide(this,event)" class="atab">煤炭</a></li>
+		  </ul>
+		  <!-- Tab panes -->
+			<div class="tab-content col-md-10" style="width:900px;height:300px">
+				<div role="tabpanel" class="tab-pane active" id="home">ehomeomehomehomehom ehomehomeomeh  omehomehome omehomeo mehom ehomehomeh omehomeom ehomehomehomehome h meomehomehom ehomehomehomeo mehomehome homehomehomeomehomehomehom ehomehomeomeh  omehomehome omehomeo mehom ehomehomeh omehomeom ehomehomehomehome h meomehomehom ehomehomehomeo mehomehome homehomehomeomehomehomehom ehomehomeomeh  omehomehome omehomeo mehom ehomehomeh omehomeom ehomehomehomehome h meomehomehom ehomehomehomeo mehomehome homehomehomeomehomehomehom ehomehomeomeh  omehomehome omehomeo mehom ehomehomeh omehomeom ehomehomehomehome h meomehomehom ehomehomehomeo mehomehome homehomehomeomehomehomehom ehomehomeomeh  omehomehome omehomeo mehom ehomehomeh omehomeom ehomehomehomehome h meomehomehom ehomehomehomeo mehomehome homehomehomeomehomehomehom ehomehomeomeh  omehomehome omehomeo mehom ehomehomeh omehomeom ehomehomehomehome h meomehomehom ehomehomehomeo mehomehome homehomehomeomehomehomehom ehomehomeomeh  omehomehome omehomeo mehom ehomehomeh omehomeom ehomehomehomehome h meomehomehom ehomehomehomeo mehomehome homehomehomeomehomehomehom ehomehomeomeh  omehomehome omehomeo mehom ehomehomeh omehomeom ehomehomehomehome h meomehomehom ehomehomehomeo mehomehome homehom</div>
+				<div role="tabpanel" class="tab-pane" id="profile">profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile profile </div>
+				<div role="tabpanel" class="tab-pane" id="messages">s messages messages messages messages messages messagesmessagesmessagesmessages messages messages messages messages messages messages messages messages messages messages messages messages messages messages messages messagesmessagesmessagesmessages messages messages messages messages messages messages messages messages messages messages messages messages messages messages messages messagesmessagesmessagesmessages messages messages messages messages messages messages messages messages messages messages messages messages messages messages messages messagesmessagesmessagesmessages messages messages messages messages messages messages messages messages messages messages messages messages messages messages messages messagesmessagesmessagesmessages messages messages messages messages messages messages messages messages messages messages messages messages messages messages messages messagesmessagesmessagesmessages messages messages messages messages messages messages messages messages messages messages messages messages messages messages messages messagesmessagesmessagesmessages messages messages messages messages messages messages messages messages messages messages messages messages messages messages messages messagesmessagesmessagesmessages messages messages messages messages messages messages messages messages messages messages messages messages messages messages messages messagesmessagesmessagesmessages messages messages messages messages messages messages messages messages messages messages messages messages messages messages messages message</div>
+				<div role="tabpanel" class="tab-pane" id="settings">settings</div>
+				<div role="tabpanel" class="tab-pane" id="settings">settings</div>
+				<div role="tabpanel" class="tab-pane" id="settings">settings</div>
+			</div>
+	</div>
+	</div>
+  <hr>
 
-</div>
   <div class="firstrow">
   <div class="row">
     <div class="col-md-4"><!--第一栏第一个-->
@@ -24,8 +68,8 @@
       <div class="list1">
 
         <ul class="list-unstyled">
-          {% for item in handler.categoryList[0].cateofa[:6] %}
-          <li><a href="/c/{{ handler.categoryList[0].cid }}/a/{{ item.aid }}" class="mylist">{{ item.atitle }}</a><span class="pul-right">{{ item.acreatetime.year }}-{{ item.acreatetime.month }}-{{ item.acreatetime.day }}</span></li>
+          {% for item in list1 %}
+          <li><a href="/c/{{ handler.categoryList[0].cid }}/a/{{ item.aid }}" class="mylist">{{ item.atitle }}</a><span class="pull-right">{{ item.acreatetime.date() }}</span></li>
           {% end %}
 
         </ul>
@@ -33,46 +77,42 @@
       </div>
     </div><!--第一栏第一个结束-->
 
-    <div class="col-md-4"><!--第一栏第二个-->
+    <div class="col-md-4"><!--第一栏第一个-->
       <div class="mylabel">
-        <p class="more"><a href="#">more >></a></p>
+        <p class="more"><a href="/c/{{ handler.categoryList[1].cid }}">more >></a></p>
         <div class="mytab">
-          <p class="tabstring">{{ _('Science') }}</p>
+          <p class="tabstring">{{ _(handler.categoryList[1].cname) }}</p>
         </div>
       </div>
       <div class="list1">
 
         <ul class="list-unstyled">
-          <li><a href="#" class="mylist">李克强总理来访吉大</a></li>
-          <li><a href="#" class="mylist">李克强总理来访吉大</a></li>
-          <li><a href="#" class="mylist">李克强总理来访吉大</a></li>
-          <li><a href="#" class="mylist">李克强总理来访吉大</a></li>
-          <li><a href="#" class="mylist">李克强总理来访吉大</a></li>
-          <li><a href="#" class="mylist">李克强总理来访吉大</a></li>
+          {% for item in list2 %}
+          <li><a href="/c/{{ handler.categoryList[1].cid }}/a/{{ item.aid }}" class="mylist">{{ item.atitle }}</a><span class="pull-right">{{ item.acreatetime.date() }}</span></li>
+          {% end %}
+
         </ul>
 
       </div>
-    </div><!--第一栏第二个结束-->
-    <div class="col-md-4"><!--第一栏第二个-->
+    </div><!--第一栏第一个结束-->
+    <div class="col-md-4"><!--第一栏第一个-->
       <div class="mylabel">
-        <p class="more"><a href="#">more >></a></p>
+        <p class="more"><a href="/c/{{ handler.categoryList[2].cid }}">more >></a></p>
         <div class="mytab">
-          <p class="tabstring">{{ _('Publish') }}</p>
+          <p class="tabstring">{{ _(handler.categoryList[2].cname) }}</p>
         </div>
       </div>
       <div class="list1">
 
         <ul class="list-unstyled">
-          <li><a href="#" class="mylist">李克强总理来访吉大</a></li>
-          <li><a href="#" class="mylist">李克强总理来访吉大</a></li>
-          <li><a href="#" class="mylist">李克强总理来访吉大</a></li>
-          <li><a href="#" class="mylist">李克强总理来访吉大</a></li>
-          <li><a href="#" class="mylist">李克强总理来访吉大</a></li>
-          <li><a href="#" class="mylist">李克强总理来访吉大</a></li>
+          {% for item in list3 %}
+          <li><a href="/c/{{ handler.categoryList[2].cid }}/a/{{ item.aid }}" class="mylist">{{ item.atitle }}</a><span class="pull-right">{{ item.acreatetime.date() }}</span></li>
+          {% end %}
+
         </ul>
 
       </div>
-    </div><!--第一栏第二个结束-->
+    </div><!--第一栏第一个结束-->
   </div>
   </div>
   </div>

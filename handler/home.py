@@ -69,7 +69,15 @@ class Home(homeBase):
     def get(self):
         homeBase.init(self)
         self.title = 'Home'
-        self.render('home_index.html')
+        if lang_encode == 'zh_CN':
+            list1 = [item for item in self.categoryList[0].cateofa if item.abc == 0 ]
+            list2 = [item for item in self.categoryList[1].cateofa if item.abc == 0 ]
+            list3 = [item for item in self.categoryList[2].cateofa if item.abc == 0 ]
+        else:
+            list1 = [item for item in self.categoryList[0].cateofa if item.abc == 1 ]
+            list2 = [item for item in self.categoryList[1].cateofa if item.abc == 1 ]
+            list3 = [item for item in self.categoryList[2].cateofa if item.abc == 1 ]
+        self.render('home_index.html', list1 = list1, list2 = list2, list3 = list3)
         self.session.close()
 
 class showArticle(staticBase):
@@ -83,7 +91,12 @@ class showArticle(staticBase):
 class showList(staticBase):
     def get(self, cid):
         staticBase.init(self, cid)
-        List = self.session.query(Category).filter(Category.cid == cid).first().cateofa
+        if lang_encode == 'zh_CN':
+            aList = self.session.query(Category).filter(Category.cid == cid).first().cateofa
+            List = [item for item in aList if item.abc == 0]
+        else:
+            aList = self.session.query(Category).filter(Category.cid == cid).first().cateofa
+            List = [item for item in aList if item.abc == 1]
         category = self.session.query(Category).filter(Category.cid == cid).first()
         self.title = category.cname
         targetpage = int(self.get_argument('page',default='1'))

@@ -96,7 +96,7 @@ class EditPage(StaticData):
         self.title = 'Edit Article'
         aid = self.get_argument('aid', default=None)
         if aid == None:
-            article = Article('','',1)
+            article = Article('','',1,0)
             article.aid = None
         else:
             article = self.session.query(Article).filter(Article.aid == aid).first()
@@ -111,9 +111,10 @@ class EditPage(StaticData):
         atitle = self.get_argument('atitle', default='')
         acontent = self.get_argument('acontent', default='')
         acategory = self.get_argument('acategory', default='')
+        abc = self.get_argument('abc', default='0')
         acid = self.session.query(Category).filter(Category.cname == acategory).first().cid
         if aid == 'None':
-            article = Article(atitle, acontent, acid)
+            article = Article(atitle, acontent, acid, int(abc))
             self.session.add(article)
             self.session.commit()
         else:
@@ -122,6 +123,7 @@ class EditPage(StaticData):
             article.acontent = acontent
             article.acid = acid
             article.amodifytime = datetime.now()
+            article.abc = int(abc)
             self.session.commit()
         self.write('<script language="javascript">alert("提交成功");self.location="/admin"</script>')
         self.session.close()
