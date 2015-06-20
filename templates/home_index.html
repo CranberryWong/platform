@@ -1,0 +1,132 @@
+{% extends "home_base.html" %}
+{% block customCSS %}
+
+{% end %}
+{% block customJS1 %}
+<script type="text/javascript">
+		function showOrHide(obj,event)
+		{
+			var etype = event.type;
+			var href = obj.href;
+			var start=href.indexOf("#");
+			var end = href.length;
+			var ptype = href.substring(start+1,end);
+			var paneObj = document.getElementById(ptype);
+			var allTabContent = $(".tab-content").children();
+
+			$(allTabContent).each(function(){
+				var contentClass = $(this).attr('class');
+				if(contentClass.indexOf("active") != -1)
+				{
+					$(this).removeClass("active");
+				}
+			});
+			$("#"+ptype).addClass("active");
+		}
+	</script>
+{% end %}
+{% block active1 %}class="active"{% end %}
+{% block maincontent %}
+    <!--<img src="../static/images/banner.png" style="width:100%;">-->
+
+<!--container-->
+<div class="container margintopfixed">
+  <div class="row">
+    <div class="col-md-12"
+		<div role="tabpanel" class="col-md-12" style="height:400px;margin-top:20px;">
+		  <!-- Nav tabs -->
+		  <ul class="nav nav-tabs" role="tablist">
+			<li role="presentation" class='line'><a href="#multiple" aria-controls="multiple" role="tab" data-toggle="tab" onmouseover="showOrHide(this,event)" class="atab">综合指数</a></li>
+			<li role="presentation" class='line'><a href="#func" aria-controls="func" role="tab" data-toggle="tab" onmouseover="showOrHide(this,event)" class="atab">功能指数</a></li>
+			<li role="presentation" class='line'><a href="#chemical" aria-controls="chemical" role="tab" data-toggle="tab" onmouseover="showOrHide(this,event)" class="atab">化工行业</a></li>
+			<li role="presentation" class='line'><a href="#mechanical" aria-controls="mechanical" role="tab" data-toggle="tab" onmouseover="showOrHide(this,event)" class="atab">机械设备行业</a></li>
+			<li role="presentation" class='line'><a href="#computer" aria-controls="computer" role="tab" data-toggle="tab" onmouseover="showOrHide(this,event)" class="atab">计算机行业</a></li>
+			<li role="presentation" class='line'><a href="#car" aria-controls="car" role="tab" data-toggle="tab" onmouseover="showOrHide(this,event)" class="atab">汽车行业</a></li>
+			<li role="presentation" class='line'><a href="#trade" aria-controls="trade" role="tab" data-toggle="tab" onmouseover="showOrHide(this,event)" class="atab">商贸行业</a></li>
+			<li role="presentation" class='line'><a href="#medicine" aria-controls="medicine" role="tab" data-toggle="tab" onmouseover="showOrHide(this,event)" class="atab">医药行业</a></li>
+			
+			
+		  </ul>
+		  <!-- Tab panes -->
+			<div class="tab-content col-md-10" style="width:900px;height:300px">
+				<!--<div role="tabpanel" class="tab-pane active" id="multiple">multiple</div>
+				<div role="tabpanel" class="tab-pane" id="func">func</div>
+				<div role="tabpanel" class="tab-pane" id="chemical">chemical</div>
+				<div role="tabpanel" class="tab-pane" id="mechanical">settings</div>
+				<div role="tabpanel" class="tab-pane" id="computer">settings</div>
+				<div role="tabpanel" class="tab-pane" id="car">aaaaaa</div>
+				<div role="tabpanel" class="tab-pane" id="trade">aaaaaa</div>
+				<div role="tabpanel" class="tab-pane" id="medicine">aaaaaa</div>
+				-->
+				<div role="tabpanel" class="tab-pane active" id="multiple">{{list1[0].acontent}}</div>
+				{% for i in range(1,8) %}
+				<div role="tabpanel" class="tab-pane" id='{{industryList[i]}}'>{{list1[i].acontent}}</div>
+				{% end %}
+			</div>
+	</div>
+	</div>
+  <hr>
+
+  <div class="firstrow">
+  <div class="row totalTab">
+    <div class="col-md-4"><!--第一栏第一个-->
+      <div class="mylabel">
+        <p class="more"><a href="/c/{{ handler.categoryList[2].cid }}">more >></a></p>
+        <div class="mytab">
+          <p class="tabstring">{{ _(handler.categoryList[2].cname) }}</p>
+        </div>
+      </div>
+      <div class="list1">
+
+        <ul class="list-unstyled">
+          {% for item in list3 %}
+          <li><a href="/c/{{ handler.categoryList[2].cid }}/a/{{ item.aid }}" class="mylist">{{ item.atitle }}</a><span class="pull-right">{{ item.acreatetime.date() }}</span></li>
+          {% end %}
+
+        </ul>
+
+      </div>
+    </div><!--第一栏第一个结束-->
+
+    <div class="col-md-4"><!--第一栏第一个-->
+      <div class="mylabel">
+        <p class="more"><a href="/c/{{ handler.categoryList[3].cid }}">more >></a></p>
+        <div class="mytab">
+          <p class="tabstring">{{ _(handler.categoryList[3].cname) }}</p>
+        </div>
+      </div>
+      <div class="list1">
+
+        <ul class="list-unstyled">
+          {% for item in list4 %}
+          <li><a href="/c/{{ handler.categoryList[3].cid }}/a/{{ item.aid }}" class="mylist">{{ item.atitle }}</a><span class="pull-right">{{ item.acreatetime.date() }}</span></li>
+          {% end %}
+
+        </ul>
+
+      </div>
+    </div><!--第一栏第一个结束-->
+    <div class="col-md-4"><!--第一栏第一个-->
+      <div class="mylabel">
+        <p class="more"><a href="/c/{{ handler.categoryList[4].cid }}">more >></a></p>
+        <div class="mytab">
+          <p class="tabstring">{{ _(handler.categoryList[4].cname) }}</p>
+        </div>
+      </div>
+      <div class="list1">
+
+        <ul class="list-unstyled">
+          {% for item in list5 %}
+          <li><a href="/c/{{ handler.categoryList[4].cid }}/a/{{ item.aid }}" class="mylist">{{ item.atitle }}</a><span class="pull-right">{{ item.acreatetime.date() }}</span></li>
+          {% end %}
+
+        </ul>
+
+      </div>
+    </div><!--第一栏第一个结束-->
+  </div>
+  </div>
+  </div>
+</div>
+</div>
+{% end %}

@@ -1,0 +1,36 @@
+{% extends "home_base.html" %}
+{% block maincontent %}
+<div class="container margintopfixed">
+  <div class="row">
+    <div class="col-md-9">
+      <div class="blog-post">
+      <h2 class="blog-post-title"><a href="/c/{{ cid }}/a/{{ article.aid }}">{{ article.atitle }}</a></h2>
+      <p>{{ _('Category') }}:{{ _(article.acate.cname) }}</p>
+      <p class="blog-post-meta">{{ _('Create Time') }}:{{ article.acreatetime }}&nbsp;&nbsp;&nbsp;&nbsp;{{ _('Modify Time') }}:{{ article.amodifytime }}</p>
+      <hr>
+      <P> {{ article.acontent }}</p>
+    </div><!-- /.blog-post -->
+    </div>
+    <div class="col-md-3">
+      <div class="sidebar-module">
+          <h4><span class="glyphicon glyphicon-inbox" aria-hidden="true"></span>&nbsp;&nbsp;Archives</h4>
+          <ol class="list-unstyled">
+            {% for art in handler.articlebydate%}
+            <li><i class="icon-hand-right"></i>&nbsp;&nbsp;&nbsp;<a href="/q/date/{{ art['year']}}/{{ art['month'] }}">{{ art['year'] }}年{{ art['month'] }}月（{{ art['num'] }}篇）</a></li>
+            {% end %}
+          </ol>
+        </div>
+        <div class="sidebar-module">
+          <h4><span class="glyphicon glyphicon-link" aria-hidden="true"></span>&nbsp;&nbsp;Friendly Link</h4>
+          <ol class="list-unstyled">
+
+
+            {% for link in handler.links %}
+            <li>&nbsp;&nbsp;&nbsp;<a href="{{ link.lurl }}" alt="">{{ link.ltitle }}</a></li>
+            {% end %}
+          </ol>
+        </div>
+    </div>
+  </div>
+</div>
+{% end %}

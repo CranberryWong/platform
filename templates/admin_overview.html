@@ -1,0 +1,41 @@
+{% extends "admin_base.html" %}
+{% block active1 %}class="active"{% end %}
+{% block maincontent %}
+<h2 class="sub-header" id="nav-article">All Articles</h2>
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Article Id</th>
+        <th>Title</th>
+        <th>Create Time</th>
+        <th>Type</th>
+        <th>Option</th>
+        <th>ON/OFF</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for article in articleList %}
+      <tr>
+        <td>{{ article.aid }}</td>
+        <td>{{ article.atitle }}</td>
+        <td>{{ article.acreatetime.ctime()[0:16] }}</td>
+        <td>{{ article.acate.cname }}</td>
+        <td><div><span><a href="/admin/editpage?aid={{ article.aid }}">Edit</a></span>&nbsp;&nbsp;|&nbsp;&nbsp;<span><a href="/admin/delpage?aid={{ article.aid }}">Delete</a></span></div></td>
+        <td><a href="/admin/changearticlechecked?aid={{ article.aid }}&acheck={{ article.acheck }}"><button id="check" type="button" class="btn btn-default btn-xs" value="{{ article.aid }}">{{ article.acheck }}</button></a></td>
+      </tr>
+      {% end %}
+    </tbody>
+  </table>
+</div>
+<nav>
+            <ul class="pagination">
+              <li><a href="{{ handler.pagination.action }}{{ handler.pagination.pre }}">&laquo;</a></li>
+              {% for page in handler.pagination.pages %}
+              <li {% if handler.pagination.current == page %} class="active" {% end %}><a href="{{ handler.pagination.action }}{{ page }}">{{ page }}</a></li>
+              {% end %}
+              <li><a href="{{ handler.pagination.action }}{{ handler.pagination.next }}">&raquo;</a></li>
+              </ul>
+            </ul>
+          </nav>
+{% end %}

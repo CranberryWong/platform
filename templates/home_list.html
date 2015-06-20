@@ -1,0 +1,61 @@
+{% extends "home_base.html" %}
+{% block maincontent %}
+<div class="container margintopfixed">
+  <div class="row">
+    {% if handler.thisquery != None %}
+    <ol class="breadcrumb">
+      <li class="active">{{ handler.thisquery }}</li>
+    </ol>
+    {% end %}
+    <div class="col-md-9">
+      <table class="table table-hover">
+        <thead>
+        <tr>
+          <th>{{ _('Title') }}</th>
+          <th>{{ _('Create Time') }}</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in articleList %}
+        <tr>
+          <td style="min-width:400px;"><a href="/c/{{ cid }}/a/{{ item.aid }}">{{ item.atitle }}</a></td>
+          <td>{{ item.acreatetime.date() }}</td>
+          </tr>
+          {% end %}
+        </tbody>
+</table>
+<nav>
+            <ul class="pagination">
+              <li><a href="{{ handler.pagination.action }}{{ handler.pagination.pre }}">&laquo;</a></li>
+              {% for page in handler.pagination.pages %}
+              <li {% if handler.pagination.current == page %} class="active" {% end %}><a href="{{ handler.pagination.action }}{{ page }}">{{ page }}</a></li>
+              {% end %}
+              <li><a href="{{ handler.pagination.action }}{{ handler.pagination.next }}">&raquo;</a></li>
+              </ul>
+            </ul>
+          </nav>
+    </div>
+    <div class="col-md-3">
+      <div class="sidebar-module">
+          <h4><span class="glyphicon glyphicon-inbox" aria-hidden="true"></span>&nbsp;&nbsp;{{ _('Archives') }}</h4>
+          <ol class="list-unstyled">
+            {% for art in handler.articlebydate%}
+            <li><i class="icon-hand-right"></i>&nbsp;&nbsp;&nbsp;<a href="/c/{{ cid }}/date/{{ art['year']}}/{{ art['month'] }}">{{ art['year'] }}-{{ art['month'] }}（{{ art['num'] }}）</a></li>
+            {% end %}
+          </ol>
+        </div>
+        <div class="sidebar-module">
+          <h4><span class="glyphicon glyphicon-link" aria-hidden="true"></span>&nbsp;&nbsp;{{ _('Friendly Link') }}</h4>
+          <ol class="list-unstyled">
+
+
+            {% for link in handler.links %}
+            <li>&nbsp;&nbsp;&nbsp;<a href="{{ link.lurl }}" alt="">{{ link.ltitle }}</a></li>
+            {% end %}
+          </ol>
+        </div>
+    </div>
+  </div>
+</div>
+{% end %}
