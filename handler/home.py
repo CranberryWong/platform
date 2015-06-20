@@ -71,7 +71,7 @@ class Home(homeBase):
         homeBase.init(self)
         self.title = 'Home'
 		#lizhuang 改了
-        industryList = ['multiple','func','chemical','mechanical','computer','car','trade','medicine']
+        industryList = ['multiple','consistency','advance','chemical','mechanical','computer','car','trade','medicine']
         if lang_encode == 'zh_CN':
             list1 = [item for item in self.categoryList[0].cateofa if item.abc == 0 ]
             list2 = [item for item in self.categoryList[1].cateofa if item.abc == 0 ]

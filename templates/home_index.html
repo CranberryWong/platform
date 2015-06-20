@@ -37,7 +37,8 @@
 		  <!-- Nav tabs -->
 		  <ul class="nav nav-tabs" role="tablist">
 			<li role="presentation" class='line'><a href="#multiple" aria-controls="multiple" role="tab" data-toggle="tab" onmouseover="showOrHide(this,event)" class="atab">综合指数</a></li>
-			<li role="presentation" class='line'><a href="#func" aria-controls="func" role="tab" data-toggle="tab" onmouseover="showOrHide(this,event)" class="atab">功能指数</a></li>
+			<li role="presentation" class='line'><a href="#consistency" aria-controls="consistency" role="tab" data-toggle="tab" onmouseover="showOrHide(this,event)" class="atab">一致性指数</a></li>
+			<li role="presentation" class='line'><a href="#advance" aria-controls="advance" role="tab" data-toggle="tab" onmouseover="showOrHide(this,event)" class="atab">先行性指数</a></li>
 			<li role="presentation" class='line'><a href="#chemical" aria-controls="chemical" role="tab" data-toggle="tab" onmouseover="showOrHide(this,event)" class="atab">化工行业</a></li>
 			<li role="presentation" class='line'><a href="#mechanical" aria-controls="mechanical" role="tab" data-toggle="tab" onmouseover="showOrHide(this,event)" class="atab">机械设备行业</a></li>
 			<li role="presentation" class='line'><a href="#computer" aria-controls="computer" role="tab" data-toggle="tab" onmouseover="showOrHide(this,event)" class="atab">计算机行业</a></li>
@@ -59,7 +60,7 @@
 				<div role="tabpanel" class="tab-pane" id="medicine">aaaaaa</div>
 				-->
 				<div role="tabpanel" class="tab-pane active" id="multiple">{{list1[0].acontent}}</div>
-				{% for i in range(1,8) %}
+				{% for i in range(1,9) %}
 				<div role="tabpanel" class="tab-pane" id='{{industryList[i]}}'>{{list1[i].acontent}}</div>
 				{% end %}
 			</div>
