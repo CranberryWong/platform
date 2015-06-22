@@ -179,6 +179,23 @@ padding: 0 2px;
 {
 	margin-right:0px;
 }
+.totalTab
+{
+	margin-top:60px;
+}
+.blog-post table
+{
+border:1px solid #999999;
+}
+.blog-post>table th
+{
+border:1px solid #999999;
+}
+.blog-post>table td
+{
+border:1px solid #999999;
+min-width:80px;
+}
 /* end */
 /* template's css */
 

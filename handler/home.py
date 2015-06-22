@@ -15,7 +15,7 @@ from PIL import Image
 from cStringIO import StringIO
 
 global lang_encode
-lang_encode = 'en_US'
+lang_encode = 'zh_CN'
 tornado.locale.set_default_locale(lang_encode)
 
 class changeLang(tornado.web.RequestHandler):
@@ -33,7 +33,8 @@ class homeBase(SignValidateBase):
         self.session = db_session.getSession
         self.thisquery = None
         self.setting = self.session.query(Setting).all()
-        self.categoryList = self.session.query(Category).filter(Category.cname != '上市公司景气指数').filter(Category.cname != '上市公司质量评价').filter(Category.ccheck == True).all()
+		#lizhuang改了
+        self.categoryList = self.session.query(Category).filter(Category.ccheck == True).all()
         setting = self.session.query(Setting).filter(Setting.sid == 1).first()
         setting.scount += 1
         global lang_encode
@@ -56,28 +57,40 @@ class staticBase(homeBase):
         self.links = self.session.query(Link).all()
         #归档
         articlelist = self.session.query(Article).filter(Article.acid == cid).order_by(Article.acreatetime.desc()).all()
-        topyear = articlelist[0].acreatetime.year
-        bottomyear = articlelist[len(articlelist) - 1].acreatetime.year
-        self.articlebydate = []
-        for year in range(bottomyear, topyear + 1):
-            for month in range(1, 13):
-                nums = len([article for article in articlelist if article.acreatetime.year == year and article.acreatetime.month ==month])
-                if nums != 0:
-                    self.articlebydate.insert(0, {'year':year, 'month':month, 'num':nums})
+        if len(articlelist) != 0:
+            topyear = articlelist[0].acreatetime.year
+            bottomyear = articlelist[len(articlelist) - 1].acreatetime.year
+            self.articlebydate = []
+            for year in range(bottomyear, topyear + 1):
+                for month in range(1, 13):
+                    nums = len([article for article in articlelist if article.acreatetime.year == year and article.acreatetime.month ==month])
+                    if nums != 0:
+                        self.articlebydate.insert(0, {'year':year, 'month':month, 'num':nums})
+        else:
+            self.articlebydate = []
+
 
 class Home(homeBase):
     def get(self):
         homeBase.init(self)
         self.title = 'Home'
+		#lizhuang 改了
+        industryList = ['multiple','consistency','advance','chemical','mechanical','computer','car','trade','medicine']
         if lang_encode == 'zh_CN':
             list1 = [item for item in self.categoryList[0].cateofa if item.abc == 0 ]
             list2 = [item for item in self.categoryList[1].cateofa if item.abc == 0 ]
             list3 = [item for item in self.categoryList[2].cateofa if item.abc == 0 ]
+            list4 = [item for item in self.categoryList[3].cateofa if item.abc == 0 ]
+            list5 = [item for item in self.categoryList[4].cateofa if item.abc == 0 ]
+
         else:
             list1 = [item for item in self.categoryList[0].cateofa if item.abc == 1 ]
             list2 = [item for item in self.categoryList[1].cateofa if item.abc == 1 ]
             list3 = [item for item in self.categoryList[2].cateofa if item.abc == 1 ]
-        self.render('home_index.html', list1 = list1, list2 = list2, list3 = list3)
+            list4 = [item for item in self.categoryList[3].cateofa if item.abc == 1 ]
+            list5 = [item for item in self.categoryList[4].cateofa if item.abc == 1 ]
+
+        self.render('home_index.html', list1 = list1, list2 = list2, list3 = list3, list4 = list4, list5 = list5, industryList = industryList)
         self.session.close()
 
 class showArticle(staticBase):

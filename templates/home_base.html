@@ -19,7 +19,9 @@
                <ul class="nav nav-pills">
                  <li role="presentation" {% block active1 %}{% end %}><a href="/">{{ _('Home') }}</a></li>
                  {% for category in handler.categoryList %}
+                 {% if category.cid != 1 and category.cid != 2 %}
                  <li role="presentation" {% if request.path == '/c/'+str(category.cid) %}class="active"{% end %}"><a href="/c/{{ category.cid }}">{{ _(category.cname) }}</a></li>
+                 {% end %}
                  {% end %}
                  <li role="presentation" {% block active2 %}{% end %}><a href="/aboutus">{{ _('About Us') }}</a></li>
                  <li role="presentation"><a href="/changelang">{{ handler.lang }}</a></li>
@@ -41,18 +43,17 @@
 
 <div class="col-md-3">
   <address>
-    <strong>Twitter, Inc.</strong><br>
-    795 Folsom Ave, Suite 600<br>
-    San Francisco, CA 94107<br>
-    <abbr title="Phone">P:</abbr> (123) 456-7890
+    <strong>北京市朝阳区曙光西里28号</strong><br>
+    中冶大厦1129室<br>
+    <abbr title="Phone">P:</abbr> 010-59868219
   </address>
 
 </div>
 <div class="col-md-3">
 
     <address>
-      <strong>Full Name</strong><br>
-      <a href="mailto:#">first.last@example.com</a>
+      <strong>联系邮箱</strong><br>
+      <a href="mailto:gsjrifb@163.com">gsjrifb@163.com</a>
     </address>
   </div>
   <div class="col-md-3">
