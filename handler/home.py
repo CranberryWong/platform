@@ -34,7 +34,7 @@ class homeBase(SignValidateBase):
         self.thisquery = None
         self.setting = self.session.query(Setting).all()
 		#lizhuang改了
-        self.categoryList = self.session.query(Category).filter(Category.ccheck == True).all()
+        self.categoryList = self.session.query(Category).filter(Category.ccheck == True).order_by(Category.serial).all()
         setting = self.session.query(Setting).filter(Setting.sid == 1).first()
         setting.scount += 1
         global lang_encode
@@ -132,8 +132,8 @@ class listByDate(staticBase):
         staticBase.init(self,cid)
         targetpage = int(self.get_argument('page',default='1'))
         articlelist = [article for article in self.session.query(Article).filter(Article.acid == cid).all() if article.acreatetime.year == int(year) and article.acreatetime.month == int(month)]
-        list, self.pagination = generatePagination('/date/' + year + '/' + month + '/c/' + cid +'?page=', articlelist, targetpage)
+        articleList, self.pagination = generatePagination('/date/' + year + '/' + month + '/c/' + cid +'?page=', articlelist, targetpage)
         self.thisquery = "归档：" + str(year) + "年" + str(month) + "月"
         self.title = "归档：" + str(year) + "年" + str(month) + "月"
-        self.render("home_list.html", list = list)
+        self.render("home_list.html", articleList = articleList, cid = cid)
         self.session.close()

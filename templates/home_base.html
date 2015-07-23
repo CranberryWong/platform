@@ -12,23 +12,32 @@
 </head>
 <body>
 <header>
-  <img src="/static/images/header.png" style="width:100%;position:absolute;z-index:1;max-height:289px;">
-    <div class="container" style="position:absolute;z-index:20;right:13%;top:33%;">
-      <nav style="margin-top:80px;" class="pull-right">
+  <img src="/static/images/header.png" style="width:100%;position:absolute;z-index:1;height:100%;">
 
-               <ul class="nav nav-pills">
-                 <li role="presentation" {% block active1 %}{% end %}><a href="/">{{ _('Home') }}</a></li>
-                 {% for category in handler.categoryList %}
-                 {% if category.cid != 1 and category.cid != 2 %}
-                 <li role="presentation" {% if request.path == '/c/'+str(category.cid) %}class="active"{% end %}"><a href="/c/{{ category.cid }}">{{ _(category.cname) }}</a></li>
-                 {% end %}
-                 {% end %}
-                 <li role="presentation" {% block active2 %}{% end %}><a href="/aboutus">{{ _('About Us') }}</a></li>
-                 <li role="presentation"><a href="/changelang">{{ handler.lang }}</a></li>
-                </ul>
+   <nav class="navbar navbar-default"  style="position:absolute;z-index:20;width:100%;top:100%;">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li role="presentation" {% block active1 %}{% end %}><a href="/">{{ _('Home') }}</a></li>
+            {% for category in handler.categoryList %}
 
-        </nav>
-   </div>
+            <li role="presentation" {% if request.path == '/c/'+str(category.cid) %}class="active"{% end %}"><a href="/c/{{ category.cid }}">{{ _(category.cname) }}</a></li>
+
+            {% end %}
+            <li role="presentation" {% block active2 %}{% end %}><a href="/aboutus">{{ _('About Us') }}</a></li>
+            <li role="presentation"><a href="/changelang">{{ handler.lang }}</a></li>
+           </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
 
 </header>
 <div style="margin:30px;"></div>
@@ -37,29 +46,15 @@
 <footer>
   <div class="container">
     <div class="row">
-      <div class="col-md-3">
+      <div class="col-md-12">
         <p>中国社会科学院金融研究所</p>
+        <address>
+          <strong>地址:北京市朝阳区曙光西里28号中冶大厦1129室</strong><br/>
+          <abbr title="Phone"><strong>电话:</strong></abbr> 010-59868219
+          <strong>联系邮箱:</strong>
+          <a href="mailto:gsjrifb@163.com">gsjrifb@163.com</a>
+        </address>
 <p><a href="/admin">Dashboard</a></p></div>
-
-<div class="col-md-3">
-  <address>
-    <strong>北京市朝阳区曙光西里28号</strong><br>
-    中冶大厦1129室<br>
-    <abbr title="Phone">P:</abbr> 010-59868219
-  </address>
-
-</div>
-<div class="col-md-3">
-
-    <address>
-      <strong>联系邮箱</strong><br>
-      <a href="mailto:gsjrifb@163.com">gsjrifb@163.com</a>
-    </address>
-  </div>
-  <div class="col-md-3">
-
-      <span>访问量:{{ handler.count }}</span>
-    </div>
 </div>
 </div>
 </footer>

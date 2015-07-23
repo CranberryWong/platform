@@ -42,12 +42,14 @@ class Category(Base):
     cid = Column(Integer, primary_key=True)
     cname = Column(String(100))
     ccheck = Column(Boolean)
+    serial = Column(Integer)
 
     cateofa = relationship('Article')
 
     def __init__(self, cname):
         self.cname = cname
         self.ccheck = True
+        self.serial = 99
 
     def __repr__(self):
         return "<Category('%s')>" % (self.cname)
