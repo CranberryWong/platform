@@ -128,7 +128,7 @@ class showAbout(homeBase):
         self.session.close()
 
 class listByDate(staticBase):
-    def get(self,year,month,cid):
+    def get(self,cid,year,month):
         staticBase.init(self,cid)
         targetpage = int(self.get_argument('page',default='1'))
         articlelist = [article for article in self.session.query(Article).filter(Article.acid == cid).all() if article.acreatetime.year == int(year) and article.acreatetime.month == int(month)]
